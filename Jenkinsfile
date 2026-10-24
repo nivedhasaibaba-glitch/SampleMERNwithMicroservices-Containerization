@@ -88,7 +88,7 @@ pipeline {
             steps {
                 withCredentials([
                     [$class: 'AmazonWebServicesCredentialsBinding',
-                     credentialsId: 'streamingapp-aws']
+                     credentialsId: 'aws-credential-nivedha']
                 ]) {
                     sh '''
                         set -eu
@@ -113,7 +113,7 @@ pipeline {
             steps {
                 withCredentials([
                     [$class: 'AmazonWebServicesCredentialsBinding',
-                     credentialsId: 'streamingapp-aws']
+                     credentialsId: 'aws-credential-nivedha']
                 ]) {
                     sh '''
                         set -eu
