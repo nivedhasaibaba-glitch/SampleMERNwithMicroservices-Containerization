@@ -1,0 +1,60 @@
+global:
+  registry: 602689946766.dkr.ecr.ap-south-1.amazonaws.com
+  imageTag: latest
+  imagePullPolicy: Always
+
+frontend:
+  repository: streamingapp-frontend
+  replicas: 2
+  port: 80
+  serviceType: ClusterIP
+
+auth:
+  repository: streamingapp-auth
+  replicas: 2
+  port: 3001
+
+streaming:
+  repository: streamingapp-streaming
+  replicas: 2
+  port: 3002
+
+admin:
+  repository: streamingapp-admin
+  replicas: 1
+  port: 3003
+
+chat:
+  repository: streamingapp-chat
+  replicas: 2
+  port: 3004
+
+config:
+  clientUrls: "*"
+  awsRegion: ap-south-1
+  awsS3Bucket: ""
+  streamingPublicUrl: ""
+
+secrets:
+  mongoUri: ""
+  jwtSecret: ""
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 60
+
+ingress:
+  enabled: true
+  className: alb
+  scheme: internet-facing
+  targetType: ip
